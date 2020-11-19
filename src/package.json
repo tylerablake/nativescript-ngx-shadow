@@ -1,6 +1,6 @@
 {
-	"name": "@mapo80/nativescript-ngx-shadow",
-	"version": "7.0.1",
+	"name": "nativescript-ngx-shadow",
+	"version": "7.0.2",
 	"description": "Nativescript Angular Shadow",
 	"main": "ngx-shadow",
 	"typings": "index.d.ts",
@@ -18,7 +18,7 @@
 		"tsc": "npm i && ts-patch install && tsc",
 		"build": "npm i && ts-patch install && npm run ngcc && npm run ngc",
 		"build.old": "npm i && ts-patch install && npm run ngcc && npm run ngc && npm run build.native",
-		"build.native": "",
+		"build.native": "node scripts/build-native.js",
 		"tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\" --exclude \"**/typings/**\"",
 		"ci.tslint": "npm i && ts-patch install && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**' --exclude '**/typings/**'",
 		"prepack": "npm run build.native",
@@ -28,7 +28,7 @@
 		"demo-angular.ios": "npm i && ts-patch install && cd ../demo-angular && ns run ios",
 		"demo-angular.android": "npm i && ts-patch install && cd ../demo-angular && ns run android",
 		"demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
-		"plugin.prepare": "npm run build && cd ../demo && ns plugin remove nativescript-ngx-shadow && ns plugin add ../src && cd ../demo-angular && ns plugin remove nativescript-ngx-shadow && ns plugin add ../src",
+		"plugin.prepare": "npm run build && cd ../demo-angular && ns plugin remove nativescript-ngx-shadow && ns plugin add ../src",
 		"clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i",
 		"ngcc": "node --max-old-space-size=8192 ./node_modules/.bin/ngcc -p es2015",
 		"ngc": "node --max-old-space-size=8192 ./node_modules/.bin/ngc"
