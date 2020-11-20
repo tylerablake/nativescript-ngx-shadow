@@ -1,6 +1,6 @@
 {
 	"name": "nativescript-ngx-shadow",
-	"version": "7.0.2",
+	"version": "7.0.3",
 	"description": "Nativescript Angular Shadow",
 	"main": "ngx-shadow",
 	"typings": "index.d.ts",
@@ -25,7 +25,7 @@
 		"demo.ios": "npm i && ts-patch install && cd ../demo && ns run ios",
 		"demo.android": "npm i && ts-patch install && cd ../demo && ns run android",
 		"demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
-		"demo-angular.ios": "npm i && ts-patch install && cd ../demo-angular && ns run ios",
+		"demo-angular.ios": "npm i && ts-patch install && cd ../demo-angular && ns debug ios --no-hmr",
 		"demo-angular.android": "npm i && ts-patch install && cd ../demo-angular && ns run android",
 		"demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
 		"plugin.prepare": "npm run build && cd ../demo-angular && ns plugin remove nativescript-ngx-shadow && ns plugin add ../src",

@@ -59,8 +59,9 @@ export class NativeShadowDirective implements OnInit, OnChanges, AfterViewInit, 
       if (isAndroid) {
         this.initializeAndroidData();
       } else if (isIOS) {
-        this.initializeIOSData();
+        // this.initializeIOSData();
       }
+      
       if (this.shadow && (this.shadow as AndroidData | IOSData).elevation) {
         if (isAndroid) {
           this.loadFromAndroidData(this.shadow as AndroidData);
@@ -115,7 +116,10 @@ export class NativeShadowDirective implements OnInit, OnChanges, AfterViewInit, 
     if (!this.initialized) {
       this.ngOnInit();
     }
-    this.applyShadow();
+    setTimeout(() => {
+      this.applyShadow();  
+    }, 0);
+    
     if (isAndroid) {
       this.previousNSFn = this.el.nativeElement._redrawNativeBackground; // just to maintain compatibility with other patches
       this.el.nativeElement._redrawNativeBackground = this.monkeyPatch;
@@ -210,9 +214,14 @@ export class NativeShadowDirective implements OnInit, OnChanges, AfterViewInit, 
       }
     }
 
-    const viewToApplyShadowTo = isIOS
-      ? this.iosShadowRapper
-      : this.el.nativeElement;
+    // This was causing iOS to be initialized with a shadow filling up the bottom of the screen, starting with the element you want to apply the shadow to.
+    // const viewToApplyShadowTo = isIOS
+    //   ? this.iosShadowRapper
+    //   : this.el.nativeElement;
+
+    const viewToApplyShadowTo = this.el.nativeElement;
+
+    // const viewToApplyShadowTo = this.iosShadowRapper;
 
     if (viewToApplyShadowTo) {
       Shadow.apply(viewToApplyShadowTo, {
@@ -278,6 +287,7 @@ export class NativeShadowDirective implements OnInit, OnChanges, AfterViewInit, 
   }
 
   private loadFromIOSData(data: IOSData) {
+    console.log(`loadFromIOSData(): ${JSON.stringify(data)}`);
     this.maskToBounds = data.maskToBounds || this.maskToBounds;
     this.shadowColor = data.shadowColor || this.shadowColor;
     this.shadowOffset = data.shadowOffset || this.shadowOffset;
